@@ -55,6 +55,7 @@ disable_advertisement() {
 
 
 ports() {
+	# converts exposed ports from docker metadata to a comma-separated list of ports for iptables
 	docker inspect $1 | jq -r '.[0].NetworkSettings.Ports | map(select(. != null)) | map(.[].HostPort) | join(",")'
 }
 
